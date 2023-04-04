@@ -32,7 +32,7 @@ FONT_3 = ('times', 14, 'bold')
 def select_files():
    """Uses Tkinter filedialog Module and PIL to load an image on the root window"""
    global img
-   # open the dialog box to choose the file to be open ( any type of file)
+   # open the dialog box to choose the file to be open It will open any type of file
    filetypes = [('All files', '*.*')]
    filename = fd.askopenfilename(
       title='SELECT A FILE',
@@ -45,14 +45,6 @@ def select_files():
    iheight= img.height
    ypix = int(iheight*300/iwidth)
    img = img.resize((300, ypix))
-
-   # Be able to use the label to show the photo in tkinter root window
-   # img1 = ImageTk.PhotoImage(img)
-   # label = Label(window, image=img1)
-
-   # to keep a reference of the image, so it is not destroyed
-   # label.image = img1
-   # label.pack(side=BOTTOM, anchor=SW, pady=15, padx=10, before=leave)
 
    # create a new window to display the image
    # the function creates a new window using Toplevel(), which is a function in the tkinter library that creates a
@@ -121,53 +113,54 @@ def restart():
 
 
 # def initial_window():
-# global window
 
 
 # -------- Widget Definition Area ----------- #
 
 # Todo 1 configure the starting presentation window.
 window = tk.Tk()
-window.title('App for Adding a Watermark to a Photo by Pedro Hernandez')
+window.title('Watermark APP by Pedro Hernandez')
 window.geometry('400x400')
-window.config(background=BACK_COLOR, highlightbackground=DARKGREY, highlightthickness=7)
+window.config(background=BACK_COLOR, highlightbackground=GREY, highlightthickness=7)
 
 
 # Todo 2 Add Initial Label.
 # add a Title Label
-title_label = Label(window, text='Please, Choose Your Image', width=30, font=FONT_1, bg=BACK_COLOR)
-title_label.pack(pady=20)
+title_label = Label(window, text='Choose Your Image', width=30, font=FONT_1, bg=BACK_COLOR, pady=5)
+title_label.pack(anchor=N)
 
 # Todo 3 add the image browsing/loading button.
 # Create a button to display the text of entry widget
 button = ttk.Button(window, text="Choose Image", command=select_files, padding=4)
-button.pack(pady=5)
+button.pack(padx=10, pady=20, anchor=W)
 
 # Todo 4 Add a input box for watermark text.
-# add a box for input the watermark text
+#add a box for input the watermark text
 water_label = Label(window, text="Add the Watermark text", font=FONT_2, bg=BACK_COLOR)
-water_label.pack(pady=10)
+water_label.pack(anchor=W, padx=10)
+
 texto = Entry(window, font=FONT_2, width=30)
-texto.pack(pady=3)
+texto.pack(anchor=W, padx=10)
 
 # Todo 5  Add a button for download the final product and a box foe adding the new location for the file.
 water_button = ttk.Button(window, text="Apply the Watermark", command=create_watermark, padding=5)
-water_button.pack(pady=5)
+water_button.pack(padx=10, pady=15, anchor=NW)
 
 want_to_save = ttk.Button(window, text="Save Your Photo", command=photo_saver, padding=3)
-want_to_save.pack(side=TOP, anchor=N, expand=True, pady=10)
+want_to_save.pack(anchor=W, pady=15, padx=10)
 
 # todo 6 add a button for leaving the app or to watermark another photo.
 leave_fmr = tk.Frame(window, relief=tk.RAISED, bd=3)
 leave = ttk.Button(leave_fmr, text="QUIT", command=quit)
-leave.pack(side=BOTTOM, anchor=N, expand=True)
-leave_fmr.pack(side=BOTTOM, anchor=N, expand=True)
+leave.pack(side=LEFT, padx=1, pady=1)
+leave_fmr.pack(side=LEFT, padx=40)
+
 
 # todo 7 add a button for restarting the program
 one_fmr = tk.Frame(window, relief=tk.RAISED, bd=3)
-one_more = ttk.Button(one_fmr, text="Restart", command=restart)
-one_more.pack(side=RIGHT, anchor=N, expand=True)
-one_fmr.pack(side=RIGHT, anchor=N, expand=True)
+one_more = ttk.Button(one_fmr, text="RESTART", command=restart)
+one_more.pack(side=LEFT, padx=1, pady=1)
+one_fmr.pack(side=LEFT, padx=10)
 
 
 window.pack_propagate(False)  # disable window size propagation
